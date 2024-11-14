@@ -21,7 +21,7 @@
     "migration:write": "prisma migrate diff --script --from-local-d1 --to-schema-datamodel ./prisma/schema.prisma --output",
     "migrate:dev": "wrangler d1 migrations apply CIDG_DATABASE --local",
     "migrate:remote": "wrangler d1 migrations apply CIDG_DATABASE --remote",
-    "type-check": "tsc --no-emit"
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@prisma/adapter-d1": "^5.21.1",
