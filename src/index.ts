@@ -1,8 +1,11 @@
 import { Hono } from 'hono';
+import { cors } from 'hono/cors';
 import { PrismaClient } from '@prisma/client';
 import { PrismaD1 } from '@prisma/adapter-d1';
 
 const app = new Hono<{ Bindings: CloudflareBindings }>();
+
+app.use('/*', cors());
 
 app.get('/', async (c) => {
   const adapter = new PrismaD1(c.env.DB);
