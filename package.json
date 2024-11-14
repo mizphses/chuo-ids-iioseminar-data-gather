@@ -1,5 +1,5 @@
 {
-  "name": "aeromate-backend",
+  "name": "chuo-ids-iioseminar-data-gather-backend",
   "scripts": {
     "dev": "run-p dev:wrangler 'gen:cf-typegen'",
     "dev:wrangler": "wrangler dev",
