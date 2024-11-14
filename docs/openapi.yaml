@@ -2,6 +2,11 @@ openapi: 3.0.0
 info:
   title: My API
   version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Development server
+  - url: https://chuo-ids-ioseminar-data-gatherer.fuminori.workers.dev #必要に応じて書き換えて
+    description: Production server
 paths:
   /:
     get:
