@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "42crunch.vscode-openapi",
+    "cloudflare.cloudflare-workers-bindings-extension",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint"
+  ]
+}

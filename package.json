@@ -1,16 +1,44 @@
 {
   "name": "aeromate-backend",
   "scripts": {
-    "dev": "wrangler dev",
+    "dev": "run-p dev:wrangler 'gen:cf-typegen'",
+    "dev:wrangler": "wrangler dev",
     "deploy": "wrangler deploy --minify",
-    "cf-typegen": "wrangler types --env-interface CloudflareBindings"
+    "start": "wrangler dev",
+    "test": "vitest",
+    "fix": "run-p format lint:fix",
+    "format": "run-p format:prettier format:prisma",
+    "format:prettier": "prettier src --write",
+    "format:prisma": "prisma format",
+    "format:check": "prettier src --check",
+    "gen:cf-typegen": "wrangler types --env-interface CloudflareBindings",
+    "gen": "run-p gen:*",
+    "gen:client": "prisma generate",
+    "lint": "eslint 'src/**/*.ts' --max-warnings 0",
+    "lint:fix": "eslint 'src/**/*.ts' --fix",
+    "migration:create": "wrangler d1 migrations create CIDG_DATABASE",
+    "migration:write-init": "prisma migrate diff --script --from-empty --to-schema-datamodel ./prisma/schema.prisma --output",
+    "migration:write": "prisma migrate diff --script --from-local-d1 --to-schema-datamodel ./prisma/schema.prisma --output",
+    "migrate:dev": "wrangler d1 migrations apply CIDG_DATABASE --local",
+    "migrate:remote": "wrangler d1 migrations apply CIDG_DATABASE --remote",
+    "type-check": "tsc --no-emit"
   },
   "dependencies": {
-    "hono": "^4.6.9"
+    "@prisma/adapter-d1": "^5.21.1",
+    "@prisma/client": "^5.22.0",
+    "globals": "^15.11.0",
+    "hono": "^4.6.5",
+    "prisma": "^5.21.1",
+    "prisma-markdown": "^1.0.9"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20241112.0",
-    "wrangler": "^3.83.0"
+    "@cloudflare/workers-types": "^4.20241018.0",
+    "eslint": "^9.13.0",
+    "npm-run-all2": "^6.2.4",
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.10.0",
+    "wrangler": "^3.79.0"
   },
   "packageManager": "pnpm@9.10.0+sha512.73a29afa36a0d092ece5271de5177ecbf8318d454ecd701343131b8ebc0c1a91c487da46ab77c8e596d6acf1461e3594ced4becedf8921b074fbd8653ed7051c"
 }
